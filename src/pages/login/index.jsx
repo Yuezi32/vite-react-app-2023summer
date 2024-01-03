@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Input } from 'antd'
 import imgLogo from './logo.png'
 import './login.styl'
+import ThemeProvider from '../../components/ConfigProvider/ThemeProvider'
 
 function Login() {
     // 创建路由钩子
@@ -28,32 +29,34 @@ function Login() {
     }
 
     return (
-        <div className="P-login">
-            <img src={imgLogo} alt="" className="logo" />
-            <div className="ipt-con">
-                <Input
-                    placeholder="账号"
-                    value={account}
-                    onChange={(e) => {
-                        setAccount(e.target.value)
-                    }}
-                />
+        <ThemeProvider>
+            <div className="P-login">
+                <img src={imgLogo} alt="" className="logo" />
+                <div className="ipt-con">
+                    <Input
+                        placeholder="账号"
+                        value={account}
+                        onChange={(e) => {
+                            setAccount(e.target.value)
+                        }}
+                    />
+                </div>
+                <div className="ipt-con">
+                    <Input.Password
+                        placeholder="密码"
+                        value={password}
+                        onChange={(e) => {
+                            setPassword(e.target.value)
+                        }}
+                    />
+                </div>
+                <div className="ipt-con">
+                    <Button type="primary" block={true} onClick={login}>
+                        登录
+                    </Button>
+                </div>
             </div>
-            <div className="ipt-con">
-                <Input.Password
-                    placeholder="密码"
-                    value={password}
-                    onChange={(e) => {
-                        setPassword(e.target.value)
-                    }}
-                />
-            </div>
-            <div className="ipt-con">
-                <Button type="primary" block={true} onClick={login}>
-                    登录
-                </Button>
-            </div>
-        </div>
+        </ThemeProvider>
     )
 }
 

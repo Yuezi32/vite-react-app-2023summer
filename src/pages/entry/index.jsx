@@ -1,9 +1,10 @@
 import { Outlet } from 'react-router-dom'
 import Header from '@/components/header'
 import { useSelector } from 'react-redux'
-import { ConfigProvider, theme } from 'antd'
+import { theme } from 'antd'
 import { PrivateRoute } from '@/router'
 import './entry.styl'
+import ThemeProvider from '../../components/ConfigProvider/ThemeProvider'
 
 // darkAlgorithm为暗色主题，defaultAlgorithm为亮色（默认）主题
 // 注意这里的theme是来自于Ant Design的，而不是store
@@ -28,14 +29,14 @@ function Entry() {
 
     return (
         <PrivateRoute>
-            <ConfigProvider theme={antdTheme}>
+            <ThemeProvider>
                 <div className="M-entry">
                     <Header />
                     <div className="main-container">
                         <Outlet />
                     </div>
                 </div>
-            </ConfigProvider>
+            </ThemeProvider>
         </PrivateRoute>
     )
 }
