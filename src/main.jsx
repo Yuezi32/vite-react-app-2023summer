@@ -8,7 +8,8 @@ import { Provider } from 'react-redux'
 // 引入Ant Design中文语言包
 import zhCN from 'antd/locale/zh_CN'
 // 全局样式
-import '@/common/styles/frame.styl'
+import '@/common/styles/global.css'
+import '@/common/styles/reset.css'
 import './mock'
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { apiReqs } from '@/api'
 import { useNavigate } from 'react-router-dom'
-import { Button, Input } from 'antd'
+import { Button, Input, Card, Col, Row } from 'antd'
 import imgLogo from './logo.png'
-import './login.styl'
 import ThemeProvider from '../../components/ConfigProvider/ThemeProvider'
+import LoginFooter from './components/LoginFooter'
+import './login.less'
+
 
 function Login() {
     // 创建路由钩子
@@ -31,30 +33,47 @@ function Login() {
     return (
         <ThemeProvider>
             <div className="P-login">
-                <img src={imgLogo} alt="" className="logo" />
-                <div className="ipt-con">
-                    <Input
-                        placeholder="账号"
-                        value={account}
-                        onChange={(e) => {
-                            setAccount(e.target.value)
-                        }}
-                    />
+
+                <div className='login-box'>
+                    <Card bordered={false}>
+                        <Row>
+                            <Col span={12}>
+
+                                <div className="logo">
+                                    <img src={imgLogo} alt="" />
+                                </div>
+
+                            </Col>
+                            <Col span={12}>
+                                <div className="ipt-con">
+                                    <Input
+                                        placeholder="账号"
+                                        value={account}
+                                        onChange={(e) => {
+                                            setAccount(e.target.value)
+                                        }}
+                                    />
+                                </div>
+                                <div className="ipt-con">
+                                    <Input.Password
+                                        placeholder="密码"
+                                        value={password}
+                                        onChange={(e) => {
+                                            setPassword(e.target.value)
+                                        }}
+                                    />
+                                </div>
+                                <div className="ipt-con">
+                                    <Button type="primary" block={true} onClick={login}>
+                                        登录
+                                    </Button>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Card>
                 </div>
-                <div className="ipt-con">
-                    <Input.Password
-                        placeholder="密码"
-                        value={password}
-                        onChange={(e) => {
-                            setPassword(e.target.value)
-                        }}
-                    />
-                </div>
-                <div className="ipt-con">
-                    <Button type="primary" block={true} onClick={login}>
-                        登录
-                    </Button>
-                </div>
+
+                <LoginFooter />
             </div>
         </ThemeProvider>
     )
