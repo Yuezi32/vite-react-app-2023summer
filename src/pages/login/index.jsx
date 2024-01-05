@@ -5,7 +5,7 @@ import { Button, Input, Card, Col, Row, Carousel, Divider } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import tuzi from "./tuzi.png";
 import wumu from "./wumu.png";
-import ThemeProvider from "../../components/ConfigProvider/ThemeProvider";
+import ThemeProvider from "@/components/ConfigProvider/ThemeProvider";
 import LoginFooter from "./components/LoginFooter";
 import "./login.less";
 

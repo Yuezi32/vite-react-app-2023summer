@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { Button, Modal } from 'antd'
-import './account.styl'
 import ReactRouterPrompt from "react-router-prompt";
+
+
 function Account() {
 
     // 创建路由钩子
