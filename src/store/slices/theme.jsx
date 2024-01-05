@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { globalConfig } from '@/globalConfig'
+import { globalConfig } from '@/config/globalConfig'
 
 // 先从localStorage里获取主题配置
 const sessionTheme = JSON.parse(window.localStorage.getItem(globalConfig.SESSION_LOGIN_THEME))

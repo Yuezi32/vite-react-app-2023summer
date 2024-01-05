@@ -1,4 +1,4 @@
-import { globalConfig } from '@/globalConfig'
+import { globalConfig } from '@/config/globalConfig'
 
 
 function LoginFooter() {

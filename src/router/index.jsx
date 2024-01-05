@@ -4,7 +4,7 @@ import Home from '@/pages/home'
 import Account from '@/pages/account'
 // 引入Entry框架页面
 import Entry from '@/pages/entry'
-import { globalConfig } from '@/globalConfig'
+import { globalConfig } from '@/config/globalConfig'
 
 // 全局路由
 export const globalRouters = createHashRouter([

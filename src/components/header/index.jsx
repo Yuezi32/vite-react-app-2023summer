@@ -13,7 +13,7 @@ import { useSelector, useDispatch } from 'react-redux'
 // 从主题换肤store分库引入setDark方法
 import { setDark } from '@/store/slices/theme'
 import ThemeModal from '@/components/themeModal'
-import { globalConfig } from '@/globalConfig'
+import { globalConfig } from '@/config/globalConfig'
 import './header.styl'
 
 function Header(props) {

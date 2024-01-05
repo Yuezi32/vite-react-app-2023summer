@@ -10,12 +10,17 @@ import zhCN from 'antd/locale/zh_CN'
 // 全局样式
 import '@/common/styles/global.css'
 import '@/common/styles/reset.css'
-import './mock'
+import '@/mock/mock'
+import swrConfig from './config/swrConfig'
+import { SWRConfig } from 'swr'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
         <ConfigProvider locale={zhCN}>
-            <RouterProvider router={globalRouters} />
+            <SWRConfig value={swrConfig.globalRouters}>
+                <RouterProvider router={globalRouters} />
+            </SWRConfig>
         </ConfigProvider>
     </Provider>
 )

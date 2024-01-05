@@ -2,7 +2,7 @@ import { Modal } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { CheckCircleFilled } from '@ant-design/icons'
 import { setColorPrimary } from '@/store/slices/theme'
-import { globalConfig } from '@/globalConfig'
+import { globalConfig } from '@/config/globalConfig'
 import './themeModal.styl'
 function ThemeModal({ onClose }) {
 
