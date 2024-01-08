@@ -31,7 +31,7 @@ function Login() {
       success: (res) => {
         console.log(res);
         setLoginLoading(false);
-        navigate("/home");
+        navigate("/workBench");
       },
       fail: (err) => {
         console.log("err", err);

@@ -15,6 +15,7 @@ import './header.less';
 const { Header } = Layout;
 const url = 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg';
 function Index(props) {
+  const navigate = useNavigate();
   const {
     token: { colorBgContainer, boxShadow },
   } = antdTheme.useToken();
@@ -37,13 +38,18 @@ function Index(props) {
     {
       key: 'loginOut',
       icon: <LogoutOutlined />,
-      label: '退出登录',
+      label: (
+        <div
+          onClick={() => {
+            navigate('/login');
+          }}>
+          退出登录
+        </div>
+      ),
     },
   ];
   // 创建路由定位钩子
   const location = useLocation();
-  // 创建路由钩子
-  const navigate = useNavigate();
 
   // 定义导航栏
   const menuItems = [

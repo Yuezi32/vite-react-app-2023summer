@@ -2,6 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
+const usedServer = 'http://39.106.158.149/'
+
 // https://vitejs.dev/config/
 export default defineConfig({
     // 静态资源引用路径，默认为"/"
@@ -25,6 +27,10 @@ export default defineConfig({
             // 例如: http://localhost:3000/api/login -> http://localhost/api/login
             '/api': {
                 target: 'http://localhost/',
+                changeOrigin: true,
+            },
+            '/nky/service': {
+                target: usedServer,
                 changeOrigin: true,
             },
         },

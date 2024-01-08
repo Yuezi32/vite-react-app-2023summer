@@ -15,7 +15,7 @@ import {
 import logo from '@/common/assets/wumusenlin-logo.png';
 import './sidebar.less';
 
-const _basicLayoutKey = 'basicLayout'
+const _basicLayoutKey = 'basicLayout';
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 const items = [
@@ -47,9 +47,7 @@ function SideBar(props) {
   const {
     token: { colorBgContainer, colorBgLayout },
   } = theme.useToken();
-  console.log('routes', routes);
-  console.log('items', items);
-  const basicLayoutRouter = routes.find((r)=>r.name ===_basicLayoutKey)
+  const basicLayoutRouter = routes.find((r) => r.name === _basicLayoutKey);
   const menuItems = basicLayoutRouter.children.map((route) => {
     const { name, path, icon, children } = route;
     return {
@@ -57,12 +55,6 @@ function SideBar(props) {
       children: children?.map(handleRoute2Menu),
     };
   });
-  useEffect(() => {
-    console.log('menuItems', menuItems);
-  }, menuItems);
-  useEffect(() => {
-    console.log('routes', routes);
-  }, []);
 
   return (
     <Sider
@@ -77,7 +69,7 @@ function SideBar(props) {
         top: 0,
         background: colorBgContainer,
       }}>
-      <Title style={{ display: 'flex', alignItems: 'center', height: 60, justifyContent: 'center',background: colorBgLayout }} level={5}>
+      <Title style={{ display: 'flex', alignItems: 'center', height: 60, justifyContent: 'center', background: colorBgLayout }} level={5}>
         <img src={logo} width={50} />
         senlin
       </Title>

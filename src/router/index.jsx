@@ -3,6 +3,8 @@ import Login from '@/pages/login';
 import Home from '@/pages/home';
 import Account from '@/pages/account';
 import BaseLayout from '@/components/basicLayout/BasicLayout.jsx';
+import BudgetApplicationList from '@/pages/pay/budgetApplication/list/Index';
+
 import { globalConfig } from '@/config/globalConfig';
 import {
   AppstoreOutlined,
@@ -38,14 +40,14 @@ export const globalRouters = createHashRouter([
         element: <Home />,
       },
       {
-        name: 'home',
-        path: '/home',
+        name: '支出管理',
+        path: '/pay',
         icon: <BarChartOutlined />,
         children: [
           {
-            name: 'home1',
-            path: '/home/1',
-            element: <Account />,
+            name: 'budgetApplication',
+            path: '/pay/budgetApplication',
+            element: <BudgetApplicationList />,
             icon: <TeamOutlined />,
           },
         ],
