@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '@/components/header';
 import { PrivateRoute } from '@/router';
@@ -10,6 +10,7 @@ import './basicLayout.less';
 const { Content, Footer } = Layout;
 
 function BasicLayout() {
+  const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -18,8 +19,8 @@ function BasicLayout() {
     <PrivateRoute>
       <ThemeProvider>
         <Layout hasSider>
-          <SideBar />
-          <Layout style={{ marginLeft: 200 }}>
+          <SideBar  />
+          <Layout>
             <Header />
             <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
               <Outlet />

@@ -4,27 +4,63 @@ import Home from '@/pages/home';
 import Account from '@/pages/account';
 import BaseLayout from '@/components/basicLayout/BasicLayout.jsx';
 import { globalConfig } from '@/config/globalConfig';
+import {
+  AppstoreOutlined,
+  BarChartOutlined,
+  CloudOutlined,
+  ShopOutlined,
+  TeamOutlined,
+  UploadOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+  HomeOutlined,
+} from '@ant-design/icons';
 
 // 全局路由
 export const globalRouters = createHashRouter([
   // 对精确匹配"/login"，跳转Login页面
   {
+    name: 'login',
     path: '/login',
     element: <Login />,
+    icon: <AppstoreOutlined />,
   },
   {
+    name: 'basicLayout',
     path: '/',
     element: <BaseLayout />,
+    icon: <BarChartOutlined />,
     children: [
       {
-        // 精确匹配"/home"，跳转Home页面
-        path: '/home',
+        name: '工作台',
+        path: '/workBench',
+        icon: <HomeOutlined />,
         element: <Home />,
       },
       {
-        // 精确匹配"/account"，跳转Account页面
+        name: 'home',
+        path: '/home',
+        icon: <BarChartOutlined />,
+        children: [
+          {
+            name: 'home1',
+            path: '/home/1',
+            element: <Account />,
+            icon: <TeamOutlined />,
+          },
+        ],
+      },
+      {
+        name: 'account',
         path: '/account',
         element: <Account />,
+        icon: <CloudOutlined />,
+      },
+      {
+        name: 'account',
+        path: '/a',
+        element: <Account />,
+        icon: <ShopOutlined />,
       },
       {
         // 如果URL没有"#路由"，跳转Home页面

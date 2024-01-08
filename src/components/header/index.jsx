@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Avatar, Button, Divider, Layout, Space, theme as antdTheme } from 'antd';
+import { Avatar, Badge, Button, Divider, Dropdown, Layout, Space, theme as antdTheme } from 'antd';
 // 新加入“太阳”图标
 import { MoonOutlined, ThemeOutlined, SunOutlined } from '@/components/extraIcons';
-import { HomeOutlined, UserOutlined } from '@ant-design/icons';
+import { HomeOutlined, UserOutlined, BellOutlined, UnorderedListOutlined, RedoOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 // 引入Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,8 +16,30 @@ const { Header } = Layout;
 const url = 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg';
 function Index(props) {
   const {
-    token: { colorBgContainer },
+    token: { colorBgContainer, boxShadow },
   } = antdTheme.useToken();
+  const dropDownItems = [
+    {
+      key: 'person',
+      icon: <UserOutlined />,
+      label: '个人设置',
+    },
+    {
+      key: 'versionList',
+      icon: <UnorderedListOutlined />,
+      label: '更新日志',
+    },
+    {
+      key: 'refreshCache',
+      icon: <RedoOutlined />,
+      label: '更新缓存',
+    },
+    {
+      key: 'loginOut',
+      icon: <LogoutOutlined />,
+      label: '退出登录',
+    },
+  ];
   // 创建路由定位钩子
   const location = useLocation();
   // 创建路由钩子
@@ -75,45 +97,50 @@ function Index(props) {
         background: colorBgContainer,
         height: 60,
         lineHeight: '60px',
-        boxShadow: 'rgb(184 184 184 / 30%) 0px 6px 5px',
+        // boxShadow,
       }}>
       <div className="header-wrap">
         <div></div>
-        <Space>
-          {theme.dark ? (
-            <Button
-              icon={<SunOutlined />}
-              shape="circle"
-              onClick={() => {
+        <div className="header-right">
+          <Button type="text" className="header-right-item">
+            <Badge count={5}>
+              <BellOutlined style={{ fontSize: '16px' }} title="通知" />
+            </Badge>
+          </Button>
+
+          <Button
+            type="text"
+            className="header-right-item"
+            onClick={() => {
+              if (theme.dark) {
                 dispatch(setDark(false));
-              }}></Button>
-          ) : (
-            <Button
-              icon={<MoonOutlined />}
-              shape="circle"
-              onClick={() => {
+              } else {
                 dispatch(setDark(true));
-              }}></Button>
-          )}
+              }
+            }}>
+            {theme.dark ? <SunOutlined style={{ fontSize: '16px' }} /> : <MoonOutlined style={{ fontSize: '16px' }} />}
+          </Button>
+          <Button
+            type="text"
+            className="header-right-item"
+            title="主题色"
+            onClick={() => {
+              setShowThemeModal(true);
+            }}>
+            <ThemeOutlined style={{ fontSize: '16px' }} />
+          </Button>
           <Divider type="vertical" style={{ height: 24 }} />
-          {
-            // 当globalConfig配置了主题色，并且数量大于0时，才显示主题色换肤按钮
-            globalConfig.customColorPrimarys && globalConfig.customColorPrimarys.length > 0 && (
-              <Button
-                icon={<ThemeOutlined />}
-                shape="circle"
-                onClick={() => {
-                  setShowThemeModal(true);
-                }}></Button>
-            )
-          }
-          <Divider type="vertical" style={{ height: 24 }} />
-          <div className="login-user-avatar">
-            <Avatar src={url} size="small" />
-            <span style={{marginLeft:8}}>张森林</span>
-          </div>
-        </Space>
+          <Dropdown menu={{ items: dropDownItems }} trigger={['click']}>
+            <Button type="text" className="header-right-item">
+              <div className="login-user-avatar">
+                <Avatar src={url} size="small" />
+                <span style={{ marginLeft: 8 }}>张森林</span>
+              </div>
+            </Button>
+          </Dropdown>
+        </div>
       </div>
+
       {
         // 显示主题色换肤对话框
         showThemeModal && (
