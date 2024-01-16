@@ -45,7 +45,7 @@ function SideBar(props) {
   const [collapsed, setCollapsed] = useState(false);
   const { routes } = globalRouters;
   const {
-    token: { colorBgContainer, colorBgLayout },
+    token: { colorPrimaryBg, colorPrimaryText, colorBgContainer },
   } = theme.useToken();
   const basicLayoutRouter = routes.find((r) => r.name === _basicLayoutKey);
   const menuItems = basicLayoutRouter.children.map((route) => {
@@ -69,9 +69,9 @@ function SideBar(props) {
         top: 0,
         background: colorBgContainer,
       }}>
-      <Title style={{ display: 'flex', alignItems: 'center', height: 60, justifyContent: 'center', background: colorBgLayout }} level={5}>
+      <Title style={{ display: 'flex', alignItems: 'center', height: 60, justifyContent: 'flex-start', color: colorPrimaryText, padding: '0 12px' }} level={5}>
         <img src={logo} width={50} />
-        senlin
+        <span style={{ paddingLeft: 12 }} >senlin</span>
       </Title>
       <Menu mode="vertical" items={menuItems} />
     </Sider>

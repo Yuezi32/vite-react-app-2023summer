@@ -1,4 +1,17 @@
-import { Button, theme, Modal, Divider, Typography, Card, Form, Input, Radio, Space, Table, Tag } from 'antd';
+import {
+  Button,
+  theme,
+  Modal,
+  Divider,
+  Typography,
+  Card,
+  Form,
+  Input,
+  Radio,
+  Space,
+  Table,
+  Tag,
+} from 'antd';
 import { logout, goto } from '@/api';
 import { useRequest } from 'ahooks';
 import { useContext, useEffect, useState } from 'react';
@@ -74,92 +87,56 @@ async function getContract() {
 
 function BudgetApplicationList() {
   const { setSpinning, senlin } = useContext(BasicLayoutContext);
-  const { data: Contract, loading } = useRequest(getContract);
-  console.log('loading', loading, senlin);
-  useEffect(() => {
-    console.log('Contract', Contract);
-  }, [Contract]);
+  const {
+    token: {
+      colorBgContainer,
+      colorPrimary,
+      colorBgBase,
+      colorPrimaryBg,
+      colorPrimaryText,
+      colorPrimaryHover,
+    },
+  } = theme.useToken();
+  const { data: Contract, loading, run } = useRequest(getContract);
+
   useEffect(() => {
     if (loading === false) {
       setSpinning(false);
     }
   }, [loading]);
   const [form] = Form.useForm();
-  const [formLayout, setFormLayout] = useState('inline');
-  const onFormLayoutChange = ({ layout }) => {
-    setFormLayout(layout);
+  const onFormLayoutChange = (values) => {
+    console.log('values', values);
+  };
+  const onHeaderCell = (row) => {
+    return {
+      style: { background: colorPrimaryBg, color: colorPrimaryText },
+    };
   };
   const columns = [
+    {
+      title: 'Id',
+      dataIndex: 'id',
+      key: 'id',
+      width: 90,
+      onHeaderCell,
+    },
     {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      render: (text) => <a>{text}</a>,
+      width: 280,
+      onHeaderCell,
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-    },
-    {
-      title: 'Tags',
-      key: 'tags',
-      dataIndex: 'tags',
-      render: (_, { tags }) => (
-        <>
-          {tags.map((tag) => {
-            let color = tag.length > 5 ? 'geekblue' : 'green';
-            if (tag === 'loser') {
-              color = 'volcano';
-            }
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </>
-      ),
-    },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (_, record) => (
-        <Space size="middle">
-          <a>Invite {record.name}</a>
-          <a>Delete</a>
-        </Space>
-      ),
+      title: 'description',
+      dataIndex: 'description',
+      key: 'description',
+      onHeaderCell,
     },
   ];
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sydney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-    },
-  ];
+
+  const dataSource = Contract ?? [];
 
   return (
     <>
@@ -168,11 +145,11 @@ function BudgetApplicationList() {
         <Form
           layout="inline"
           form={form}
-          initialValues={{ layout: formLayout }}
+          initialValues={{ layout: 'inline' }}
           onValuesChange={onFormLayoutChange}
-          style={{ maxWidth: formLayout === 'inline' ? 'none' : 600 }}>
+          style={{ maxWidth: 'none' }}>
           <Form.Item label="Form Layout" name="layout">
-            <Radio.Group value={formLayout}>
+            <Radio.Group value="inline">
               <Radio.Button value="horizontal">Horizontal</Radio.Button>
               <Radio.Button value="vertical">Vertical</Radio.Button>
               <Radio.Button value="inline">Inline</Radio.Button>
@@ -185,12 +162,22 @@ function BudgetApplicationList() {
             <Input placeholder="input placeholder" />
           </Form.Item>
           <Form.Item>
-            <Button type="primary">Submit</Button>
+            <Button type="primary" onClick={() => run()}>
+              Submit
+            </Button>
           </Form.Item>
         </Form>
       </Card>
+      <br />
       <Card>
-        <Table columns={columns} dataSource={data} />
+        <Table
+          columns={columns}
+          dataSource={dataSource}
+          loading={loading}
+          scroll={{ y: 400 }}
+          virtual
+          sticky
+        />
       </Card>
     </>
   );
