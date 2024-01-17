@@ -14,6 +14,11 @@ export default defineConfig({
         // 静态资源存放目录名称，默认为"assets"
         assetsDir: 'static',
     },
+    //全局变量，可通过window.__APP_VERSION__来访问
+    define: {
+        __APP_VERSION__: JSON.stringify('v1.0.0'),
+        __API_URL__: 'window.__backend_api_url',
+    },
     server: {
         // 支持IP访问
         host: true,

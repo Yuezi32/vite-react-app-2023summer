@@ -33,11 +33,11 @@ const items = [
   label: `nav ${index + 1}`,
 }));
 function handleRoute2Menu(route) {
-  const { name, path, icon } = route;
+  const { name, path, icon, children } = route;
   return {
     key: String(path),
     icon,
-    label: <Link to={path}>{name}</Link>,
+    label: children?.length > 0 ? name : <Link to={path}>{name}</Link>,
   };
 }
 
@@ -49,7 +49,7 @@ function SideBar(props) {
   } = theme.useToken();
   const basicLayoutRouter = routes.find((r) => r.name === _basicLayoutKey);
   const menuItems = basicLayoutRouter.children.map((route) => {
-    const { name, path, icon, children } = route;
+    const { children } = route;
     return {
       ...handleRoute2Menu(route),
       children: children?.map(handleRoute2Menu),
@@ -69,9 +69,18 @@ function SideBar(props) {
         top: 0,
         background: colorBgContainer,
       }}>
-      <Title style={{ display: 'flex', alignItems: 'center', height: 60, justifyContent: 'flex-start', color: colorPrimaryText, padding: '0 12px' }} level={5}>
+      <Title
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          height: 60,
+          justifyContent: 'flex-start',
+          color: colorPrimaryText,
+          padding: '0 12px',
+        }}
+        level={5}>
         <img src={logo} width={50} />
-        <span style={{ paddingLeft: 12 }} >senlin</span>
+        <span style={{ paddingLeft: 12 }}>senlin</span>
       </Title>
       <Menu mode="vertical" items={menuItems} />
     </Sider>

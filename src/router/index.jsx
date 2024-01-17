@@ -45,22 +45,28 @@ export const globalRouters = createHashRouter([
         icon: <BarChartOutlined />,
         children: [
           {
-            name: 'budgetApplication',
+            name: '事前申请',
             path: '/pay/budgetApplication',
             element: <BudgetApplicationList />,
             icon: <TeamOutlined />,
           },
+          {
+            name: '报销申请',
+            path: '/pay/reimburse',
+            element: <BudgetApplicationList />,
+            icon: <UserOutlined />,
+          },
         ],
       },
       {
-        name: 'account',
+        name: '人员信息',
         path: '/account',
         element: <Account />,
         icon: <CloudOutlined />,
       },
       {
-        name: 'account',
-        path: '/a',
+        name: '系统信息',
+        path: '/system',
         element: <Account />,
         icon: <ShopOutlined />,
       },

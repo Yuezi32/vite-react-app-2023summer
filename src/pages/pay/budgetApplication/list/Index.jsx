@@ -133,6 +133,7 @@ function BudgetApplicationList() {
       dataIndex: 'description',
       key: 'description',
       onHeaderCell,
+      render: (v)=><Text ellipsis>{v}</Text>
     },
   ];
 
@@ -140,7 +141,7 @@ function BudgetApplicationList() {
 
   return (
     <>
-      <Title level={3}>事前申请</Title>
+      <Title level={4}>事前申请</Title>
       <Card>
         <Form
           layout="inline"
@@ -174,8 +175,8 @@ function BudgetApplicationList() {
           columns={columns}
           dataSource={dataSource}
           loading={loading}
-          scroll={{ y: 400 }}
-          virtual
+          scroll={{ y: 350 }}
+          // virtual
           sticky
         />
       </Card>
