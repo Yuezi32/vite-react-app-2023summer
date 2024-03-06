@@ -1,0 +1,54 @@
+#basic-layout {
+  display: flex;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
+
+#basic-layout-nav {
+  width: 180px;
+  background-color: antiquewhite;
+}
+
+#basic-layout-main {
+  width: calc(100% - 180px);
+}
+
+#basic-animation-box {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: antiquewhite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.with-in {
+  animation: basic-animation-box-in .3s
+}
+
+.with-out {
+  animation: basic-animation-box-out .3s
+}
+
+@keyframes basic-animation-box-in {
+  from {
+    top: 100%;
+  }
+
+  to {
+    top: 0;
+  }
+}
+
+@keyframes basic-animation-box-out {
+  from {
+    top: 0;
+  }
+
+  to {
+    height: -100%;
+  }
+}

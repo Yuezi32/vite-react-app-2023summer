@@ -1,54 +1,91 @@
-import { createHashRouter, Navigate } from 'react-router-dom'
-import Login from '@/pages/login'
-import Home from '@/pages/home'
-import Account from '@/pages/account'
-// 引入Entry框架页面
-import Entry from '@/pages/entry'
-import { globalConfig } from '@/globalConfig'
+import { createHashRouter, Navigate } from 'react-router-dom';
+import Login from '@/pages/login';
+import Home from '@/pages/home';
+import Account from '@/pages/account';
+import BaseLayout from '@/components/basicLayout/BasicLayout.jsx';
+import BudgetApplicationList from '@/pages/pay/budgetApplication/list/Index';
+
+import { globalConfig } from '@/config/globalConfig';
+import {
+  AppstoreOutlined,
+  BarChartOutlined,
+  CloudOutlined,
+  ShopOutlined,
+  TeamOutlined,
+  UploadOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+  HomeOutlined,
+} from '@ant-design/icons';
 
 // 全局路由
 export const globalRouters = createHashRouter([
-    // 对精确匹配"/login"，跳转Login页面
-    {
-        path: '/login',
-        element: <Login />,
-    },
-    {
-        // 未匹配"/login"，全部进入到entry路由
-        path: '/',
-        element: <Entry />,
-        // 定义entry二级路由
+  // 对精确匹配"/login"，跳转Login页面
+  {
+    name: 'login',
+    path: '/login',
+    element: <Login />,
+    icon: <AppstoreOutlined />,
+  },
+  {
+    name: 'basicLayout',
+    path: '/',
+    element: <BaseLayout />,
+    icon: <BarChartOutlined />,
+    children: [
+      {
+        name: '工作台',
+        path: '/workBench',
+        icon: <HomeOutlined />,
+        element: <Home />,
+      },
+      {
+        name: '支出管理',
+        path: '/pay',
+        icon: <BarChartOutlined />,
         children: [
-            {
-                // 精确匹配"/home"，跳转Home页面
-                path: '/home',
-                element: <Home />,
-            },
-            {
-                // 精确匹配"/account"，跳转Account页面
-                path: '/account',
-                element: <Account />,
-            },
-            {
-                // 如果URL没有"#路由"，跳转Home页面
-                path: '/',
-                element: <Navigate to="/home" />,
-            },
-            {
-                // 未匹配，跳转Login页面
-                path: '*',
-                element: <Navigate to="/login" />,
-            },
+          {
+            name: '事前申请',
+            path: '/pay/budgetApplication',
+            element: <BudgetApplicationList />,
+            icon: <TeamOutlined />,
+          },
+          {
+            name: '报销申请',
+            path: '/pay/reimburse',
+            element: <BudgetApplicationList />,
+            icon: <UserOutlined />,
+          },
         ],
-    },
-])
+      },
+      {
+        name: '人员信息',
+        path: '/account',
+        element: <Account />,
+        icon: <CloudOutlined />,
+      },
+      {
+        name: '系统信息',
+        path: '/system',
+        element: <Account />,
+        icon: <ShopOutlined />,
+      },
+      {
+        // 如果URL没有"#路由"，跳转Home页面
+        path: '/',
+        element: <Navigate to="/home" />,
+      },
+      {
+        // 未匹配，跳转Login页面
+        path: '*',
+        element: <Navigate to="/login" />,
+      },
+    ],
+  },
+]);
 
 // 路由守卫
 export function PrivateRoute(props) {
-    // 判断localStorage是否有登录用户信息，如果没有则跳转登录页
-    return window.localStorage.getItem(globalConfig.SESSION_LOGIN_INFO) ? (
-        props.children
-    ) : (
-        <Navigate to="/login" />
-    )
+  // 判断localStorage是否有登录用户信息，如果没有则跳转登录页
+  return window.localStorage.getItem(globalConfig.SESSION_LOGIN_INFO) ? props.children : <Navigate to="/login" />;
 }

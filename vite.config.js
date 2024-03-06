@@ -2,6 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
+const usedServer = 'http://39.106.158.149/'
+
 // https://vitejs.dev/config/
 export default defineConfig({
     // 静态资源引用路径，默认为"/"
@@ -11,6 +13,11 @@ export default defineConfig({
         outDir: 'build',
         // 静态资源存放目录名称，默认为"assets"
         assetsDir: 'static',
+    },
+    //全局变量，可通过window.__APP_VERSION__来访问
+    define: {
+        __APP_VERSION__: JSON.stringify('v1.0.0'),
+        __API_URL__: 'window.__backend_api_url',
     },
     server: {
         // 支持IP访问
@@ -25,6 +32,10 @@ export default defineConfig({
             // 例如: http://localhost:3000/api/login -> http://localhost/api/login
             '/api': {
                 target: 'http://localhost/',
+                changeOrigin: true,
+            },
+            '/nky/service': {
+                target: usedServer,
                 changeOrigin: true,
             },
         },
